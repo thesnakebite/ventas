@@ -160,7 +160,7 @@
     <section class="content">
       <div class="container-fluid">
 
-
+        {{ $slot }}
         <!-- /.row -->
       </div><!--/. container-fluid -->
     </section>
