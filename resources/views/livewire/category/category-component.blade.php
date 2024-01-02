@@ -1,9 +1,10 @@
 <div>
     <x-card cardTitle="Listado categorías" 
-            cardFooter="">
-            <x-slot:cardTools>
-                <a href="#" class="btn btn-primary">Crear categoría</a>
-            </x-slot>
+            cardFooter=""
+    >
+        <x-slot:cardTools>
+            <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#modalCategory">Crear categoría</a>
+                </x-slot>
 
             <x-table>
                 <x-slot:thead>
@@ -37,4 +38,12 @@
                     </tr>
             </x-table>
     </x-card>
+
+    <x-modal modalId="modalCategory" modalTitle="Categorías"  >
+        <form action="#">
+            <p>Form</p>
+
+            <button type="button" class="btn btn-primary float-right">Guardar cambios</button>
+        </form>
+    </x-modal>
 </div>
