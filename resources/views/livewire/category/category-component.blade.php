@@ -41,11 +41,13 @@
 
     <x-modal modalId="modalCategory" modalTitle="Categorías"  >
         <form wire:submit="store">
-            <div class="row">
-                <div class="col">
+            <div class="form-row">
+                <div class="form-group col-12">
+                    <label for="name">Nombre:</label>
                     <input 
                         wire:model="name"
                         type="text" 
+                        id="name"
                         class="form-control" 
                         placeholder="Nombre categoría" 
                     />
