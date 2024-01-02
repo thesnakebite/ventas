@@ -15,10 +15,10 @@
                     <th width="3%">....</th>
 
                 </x-slot>
-                
+                    @forelse ($categories as $category)
                     <tr>
-                        <td>....</td>
-                        <td>....</td>
+                        <td>{{ $category->id }}</td>
+                        <td>{{ $category->name }}</td>
                         <td>
                             <a href="#" class="btn btn-outline-light btn-xs" title="Ver">
                                 <i class="fas fa-solid fa-eye"></i>
@@ -34,8 +34,12 @@
                                 <i class="fas fa-trash-alt"></i>
                             </a>
                         </td>
-
                     </tr>
+                    @empty
+                        <tr class="text-center">
+                            <td colspan="5" class="text-warning">Sin registros !!</td>
+                        </tr>
+                    @endforelse
             </x-table>
     </x-card>
 
