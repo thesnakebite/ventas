@@ -43,9 +43,8 @@ class CategoryComponent extends Component
 
         $this->validate($rules, $message);
 
-        $category = Category::create([
-            'name' => $this->name
-        ]);
+        $category = new Category();
+        $category->name = $this->name;
         $category->save();
 
         $this->dispatch('close-modal', 'modalCategory');

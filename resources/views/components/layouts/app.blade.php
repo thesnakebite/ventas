@@ -48,11 +48,10 @@
         <!-- REQUIRED SCRIPTS -->
         @include('components.layouts.partials.js')
 
-        <!-- PLUGNS -->
         <script>
             document.addEventListener('livewire:init', () => {
                 Livewire.on('close-modal', (idModal) => {
-                    $('#', idModal).modal('hide');
+                    $('#' + idModal).modal('hide');
                 })
             }) 
         </script>
