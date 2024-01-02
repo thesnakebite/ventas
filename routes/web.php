@@ -24,4 +24,4 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/inicio', Inicio::class)->name('inicio');
-Route::get('/categorias', CategoryComponent::class)->name('categorias');
+Route::get('/categorias', CategoryComponent::class)->name('categories');

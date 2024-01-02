@@ -23,7 +23,7 @@
                     </div>
                 </div>
             </form>
-        </li
+        </li>
         
         <li class="nav-item dropdown user-menu">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
