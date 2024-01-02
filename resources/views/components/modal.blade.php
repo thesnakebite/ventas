@@ -5,7 +5,8 @@
 ])
 
 <!-- Modal -->
-<div class="modal fade" 
+<div wire:ignore.self
+     class="modal fade" 
      id="{{ $modalId }}" 
      tabindex="-1" 
      aria-labelledby="exampleModalLabel" 
