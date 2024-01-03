@@ -14,6 +14,7 @@ class CategoryComponent extends Component
     use WithPagination;
 
     // Propiedades clase
+    public $search = '';
     public $totalRegistros= 0;
 
     // Propiedades modelo
@@ -21,9 +22,14 @@ class CategoryComponent extends Component
 
     public function render()
     {
+        if($this->search != ''){
+            $this->resetPage();
+        }
+        
         $this->totalRegistros = Category::count();
 
-        $categories = Category::orderBy('id', 'desc')
+        $categories = Category::where('name', 'like', '%' . $this->search . '%')
+            ->orderBy('id', 'desc')
             ->paginate(5);
 
         return view('livewire.category.category-component', [
