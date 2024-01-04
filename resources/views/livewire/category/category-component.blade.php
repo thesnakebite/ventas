@@ -26,7 +26,7 @@
                         <td>{{ $category->id }}</td>
                         <td>{{ $category->name }}</td>
                         <td>
-                            <a href="#" class="btn btn-outline-light btn-xs" title="Ver">
+                            <a href="{{ route('categories.show', $category) }}" class="btn btn-outline-light btn-xs" title="Ver">
                                 <i class="fas fa-solid fa-eye"></i>
                             </a>
                         </td>
