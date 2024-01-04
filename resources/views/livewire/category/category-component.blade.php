@@ -44,7 +44,7 @@
                         </td>
                         <td>
                             <a wire:click="$dispatch('delete', {id: {{ $category->id }}, 
-                                componente:'category.category-component'})"
+                                eventName:'destroyCategory'})"
                                class="btn btn-outline-danger btn-xs"
                                title="Eliminar"
                             >

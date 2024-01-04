@@ -2,10 +2,11 @@
 
 namespace App\Livewire\Category;
 
-use App\Models\Category;
 use Livewire\Component;
-use Livewire\Attributes\Title;
+use App\Models\Category;
+use Livewire\Attributes\On;
 use Livewire\WithPagination;
+use Livewire\Attributes\Title;
 
 #[Title('Categorías')]
 
@@ -111,5 +112,15 @@ class CategoryComponent extends Component
         $this->dispatch('msg', 'Categoría actualizada con éxito');
 
         $this->reset(['name']);
+    }
+
+    #[On('destroyCategory')]
+    public function destroy($id)
+    {
+        // dump('Eliminar categoría'). $id;
+        $category = Category::findOrfail($id);
+        $category->delete();
+
+        $this->dispatch('msg', 'Categoría eliminada con éxito');
     }
 }
