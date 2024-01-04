@@ -6,3 +6,5 @@
 <script src="{{ asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('dist/js/adminlte.js') }}"></script>
+<!-- Sweet Alert -->
+<script src="{{ asset('plugins/sweetalert2/sweetalert2.js') }}"></script>

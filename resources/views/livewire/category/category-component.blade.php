@@ -26,22 +26,30 @@
                         <td>{{ $category->id }}</td>
                         <td>{{ $category->name }}</td>
                         <td>
-                            <a href="{{ route('categories.show', $category) }}" class="btn btn-outline-light btn-xs" title="Ver">
-                                <i class="fas fa-solid fa-eye"></i>
+                            <a href="{{ route('categories.show', $category) }}" 
+                               class="btn btn-outline-light btn-xs" 
+                               title="Ver"
+                            >
+                            <i class="fas fa-solid fa-eye"></i>
                             </a>
                         </td>
                         <td>
-                            <a wire:click='edit({{ $category->id }})' 
-                               href="#" 
+                            <a wire:click='edit( {{ $category->id }} )' 
+                               href="#"
                                class="btn btn-outline-primary btn-xs" 
                                title="Editar"
                             >
-                                <i class="fas fa-edit"></i>
+                            <i class="fas fa-edit"></i>
                             </a>
                         </td>
                         <td>
-                            <a href="#" class="btn btn-outline-danger btn-xs" title="Eliminar">
-                                <i class="fas fa-trash-alt"></i>
+                            <a wire:click="$dispatch('delete', {id: {{ $category->id }}, 
+                                componente:'category.category-component'})"
+                               class="btn btn-outline-danger btn-xs"
+                               title="Eliminar"
+                            >
+                            <i class="fas fa-trash-alt"></i>
+                                
                             </a>
                         </td>
                     </tr>
