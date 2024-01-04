@@ -20,6 +20,7 @@ class CategoryComponent extends Component
 
     // Propiedades modelo
     public $name;
+    public $Id;
 
     public function render()
     {
@@ -68,5 +69,10 @@ class CategoryComponent extends Component
         $this->dispatch('msg', 'Categoría creada con éxito');
 
         $this->reset(['name']);
+    }
+
+    public function edit(Category $category)
+    {
+        $this->Id = $category->id;
     }
 }
