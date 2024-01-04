@@ -74,5 +74,8 @@ class CategoryComponent extends Component
     public function edit(Category $category)
     {
         $this->Id = $category->id;
+        $this->name = $category->name;
+
+        $this->dispatch('open-modal', 'modalCategory');
     }
 }
