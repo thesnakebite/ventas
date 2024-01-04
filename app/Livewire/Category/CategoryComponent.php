@@ -77,5 +77,32 @@ class CategoryComponent extends Component
         $this->name = $category->name;
 
         $this->dispatch('open-modal', 'modalCategory');
+
+        // dump($category);
+    }
+
+    public function update(Category $category)
+    {
+        // dump($category);
+        $rules = [
+            'name' => 'required|min:5|max:255|unique:categories,id,'. $this->Id
+        ];
+
+        $message = [
+            'name.required' => 'El nombre de la categoría es requerido',
+            'name.min' => 'El nombre de la categoría debe tener al menos 5 caracteres',
+            'name.max' => 'El nombre de la categoría debe tener máximo 255 caracteres',
+            'name.unique' => 'El nombre de la categoría ya existe'
+        ];
+
+        $this->validate($rules, $message);
+
+        $category->name = $this->name;
+        $category->update();
+
+        $this->dispatch('close-modal', 'modalCategory');
+        $this->dispatch('msg', 'Categoría actualizada con éxito');
+
+        $this->reset(['name']);
     }
 }

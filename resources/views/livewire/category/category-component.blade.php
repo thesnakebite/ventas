@@ -50,7 +50,7 @@
     </x-card>
 
     <x-modal modalId="modalCategory" modalTitle="Categorías"  >
-        <form wire:submit="{{ $Id==0 ? 'store' : 'update' }}">
+        <form wire:submit={{ $Id==0 ? "store" : "update($Id)" }}>
             <div class="form-row">
                 <div class="form-group col-12">
                     <label for="name">Nombre:</label>
