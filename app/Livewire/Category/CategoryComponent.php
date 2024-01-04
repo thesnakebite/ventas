@@ -16,6 +16,7 @@ class CategoryComponent extends Component
     // Propiedades clase
     public $search = '';
     public $totalRegistros= 0;
+    public $cant= 5;
 
     // Propiedades modelo
     public $name;
@@ -30,7 +31,7 @@ class CategoryComponent extends Component
 
         $categories = Category::where('name', 'like', '%' . $this->search . '%')
             ->orderBy('id', 'desc')
-            ->paginate(5);
+            ->paginate( $this->cant );
 
         return view('livewire.category.category-component', [
             'categories' => $categories
