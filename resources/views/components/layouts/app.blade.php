@@ -66,7 +66,7 @@
             document.addEventListener('livewire:init', () => {
 
                 Livewire.on('delete', (e) => {
-                    // alert(e.id+'-'+e.componente)
+                    // alert(e.id+'-'+e.eventName)
 
                     Swal.fire({
                     title: "Estás seguro?",
