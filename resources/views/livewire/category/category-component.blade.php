@@ -27,7 +27,7 @@
                         <td>{{ $category->name }}</td>
                         <td>
                             <a href="{{ route('categories.show', $category) }}" 
-                               class="btn btn-outline-light btn-xs" 
+                               class="btn btn-outline-light btn-sm" 
                                title="Ver"
                             >
                             <i class="fas fa-solid fa-eye"></i>
@@ -36,7 +36,7 @@
                         <td>
                             <a wire:click='edit( {{ $category->id }} )' 
                                href="#"
-                               class="btn btn-outline-primary btn-xs" 
+                               class="btn btn-outline-primary btn-sm" 
                                title="Editar"
                             >
                             <i class="fas fa-edit"></i>
@@ -45,7 +45,7 @@
                         <td>
                             <a wire:click="$dispatch('delete', {id: {{ $category->id }}, 
                                 eventName:'destroyCategory'})"
-                               class="btn btn-outline-danger btn-xs"
+                               class="btn btn-outline-danger btn-sm"
                                title="Eliminar"
                             >
                             <i class="fas fa-trash-alt"></i>

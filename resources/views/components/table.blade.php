@@ -15,7 +15,7 @@
     </div>
 </div>
 
-<div class="table-responsive">
+<div class="table-responsive table-striped table-hover">
     <table class="table">
         <thead>
             <tr>
