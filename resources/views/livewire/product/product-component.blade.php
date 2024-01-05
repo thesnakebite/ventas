@@ -21,6 +21,7 @@
                     <th>Stock</th>
                     <th>Categoría</th>
                     <th>Estado</th>
+                    <th>Código barras</th>
                     <th width="3%">....</th>
                     <th width="3%">....</th>
                     <th width="3%">....</th>
@@ -29,7 +30,7 @@
                     @forelse ($products as $product)
                     <tr>
                         <td>{{ $product->id }}</td>
-                        <td>{{ $product->image }}</td>
+                        <td>Imagen</td>
                         <td>{{ $product->name }}</td>
                         <td>{{ $product->purchase_price }}</td>
                         <td>{{ $product->stock }}</td>
@@ -38,7 +39,7 @@
 
                         <td>{{ $product->name }}</td>
                         <td>
-                            <a href="{{ route('products.show', $product) }}" 
+                            <a href="#" 
                                class="btn btn-outline-light btn-sm" 
                                title="Ver"
                             >

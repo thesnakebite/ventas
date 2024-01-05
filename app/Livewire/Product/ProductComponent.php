@@ -3,12 +3,18 @@
 namespace App\Livewire\Product;
 
 use App\Models\Product;
-use Livewire\Attributes\Title;
 use Livewire\Component;
+use App\Models\Category;
+use Livewire\Attributes\Computed;
+use Livewire\WithPagination;
+use Livewire\WithFileUploads;
+use Livewire\Attributes\Title;
 
 #[Title('Productos')]
 class ProductComponent extends Component
 {
+    use WithFileUploads;
+    use WithPagination;
      // Propiedades clase
     public $search = '';
     public $totalRegistros= 0;
@@ -22,8 +28,8 @@ class ProductComponent extends Component
     public $purchase_price;
     public $sale_price;
     public $barcode;
-    public $stock= 10;
-    public $minimum_stock;
+    public $stock= 0;
+    public $minimum_stock= 10;
     public $date_expired;
     public $active= 1;
     public $image;
@@ -40,6 +46,12 @@ class ProductComponent extends Component
         return view('livewire.product.product-component', [
             'products' => $products
         ]);
+    }
+
+    #[Computed('products')]
+    public function categories()
+    {
+        return Category::all();
     }
 
     public function create()
@@ -78,5 +90,50 @@ class ProductComponent extends Component
         ];
 
         $this->validate($rules, $messages);
+
+        $product= new Product();
+
+        $product->name = $this->name;
+        $product->description = $this->description;
+        $product->purchase_price = $this->purchase_price;
+        $product->sale_price = $this->sale_price;
+        $product->stock = $this->stock;
+        $product->minimum_stock = $this->minimum_stock;
+        $product->barcode = $this->barcode;
+        $product->date_expired = $this->date_expired;
+        $product->category_id = $this->category_id;
+        $product->active = $this->active;
+        $product->save();
+
+        if ($this->image) {
+            $customImage = 'products/' . uniqid() . '.' . $this->image->extension();
+            $this->image->storeAs('public', $customImage);
+            $product->image()->create([
+                'url' => $customImage,
+            ]);
+        }
+
+        $this->dispatch('close-modal', 'modalProduct');
+        $this->dispatch('msg', 'Producto creado con éxito');
+
+        $this->clean();
+    }
+
+    public function clean()
+    {
+        $this->reset([
+            'Id',
+            'name',
+            'description',
+            'purchase_price',
+            'sale_price',
+            'stock',
+            'minimum_stock',
+            'barcode',
+            'date_expired',
+            'category_id',
+            'active',
+            'image',
+        ]);
     }
 }

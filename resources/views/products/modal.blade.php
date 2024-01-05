@@ -22,10 +22,12 @@
                         id="category_id"
                         class="form-control"
                 >
-                    <option value="">Seleccionar</option>
-                        
-                            {{-- <option value="{{ $category->id }}">{{ $category->name }}</option>     --}}
-                        
+                    <option value="0">Seleccione</option>
+                        @foreach ($this->categories as $category)
+                            <option value="{{ $category->id }}">
+                                {{ $category->name }}
+                            </option>
+                        @endforeach
                 </select>
                 @error('category_id')
                     <div class="alert alert-danger w-100 mt-3 text-sm">{{ $message }}</div>
@@ -52,6 +54,8 @@
             <div class="form-group col-md-4">
                 <label for="purchase_price">Precio compra:</label>
                 <input wire:model="purchase_price"
+                       min="0"
+                       step="any"
                        type="number" 
                        id="purchase_price"
                        class="form-control" 
@@ -66,6 +70,8 @@
             <div class="form-group col-md-4">
                 <label for="sale_price">Precio venta:</label>
                 <input wire:model="sale_price"
+                       min="0"
+                       step="any"
                        type="number" 
                        id="sale_price"
                        class="form-control" 
@@ -94,6 +100,7 @@
             <div class="form-group col-md-4">
                 <label for="stock">Stock:</label>
                 <input wire:model="stock"
+                       min="0"
                        type="number" 
                        id="stock"
                        class="form-control" 
@@ -124,8 +131,7 @@
                 <input wire:model="date_expired"
                        type="date" 
                        id="date_expired"
-                       class="form-control" 
-                       placeholder="Fecha de vencimiento" 
+                       class="form-control"
                 />
                 @error('date_expired')
                     <div class="alert alert-danger w-100 mt-3 text-sm">{{ $message }}</div>
@@ -138,6 +144,7 @@
                     <input wire:model="active"
                            type="checkbox" 
                            id="active" 
+                           checked
                     />
                     <label for="active">¿Esta activo?</label>
                 </div>
@@ -160,11 +167,14 @@
             </div>
 
             {{-- Image preview --}}
-            <div class="form-group col-md-6">
-
-                <img src="" alt="">
+            <div class="form-group col-md-6 float-rigth">
+                @if ($this->image)
+                    <img src="{{ $image->temporaryUrl() }}" 
+                         width="100"
+                         class="rounded float-right"
+                         />
+                @endif
             </div>
-
         </div>
 
             <button class="btn btn-primary float-right mt-3">{{ $Id==0 ? 'Guardar' : 'Editar' }}</button>
