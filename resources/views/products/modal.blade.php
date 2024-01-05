@@ -171,12 +171,16 @@
                 @if ($this->image)
                     <img src="{{ $image->temporaryUrl() }}" 
                          width="100"
-                         class="rounded float-right"
-                         />
+                         class="rounded float-right"     
+                    />
                 @endif
             </div>
         </div>
 
-            <button class="btn btn-primary float-right mt-3">{{ $Id==0 ? 'Guardar' : 'Editar' }}</button>
+            <button
+                wire:loading.attr='disabled'
+                class="btn btn-primary float-right mt-3">
+                    {{ $Id==0 ? 'Guardar' : 'Editar' }}
+            </button>
     </form>
 </x-modal>

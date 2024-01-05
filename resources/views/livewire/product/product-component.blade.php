@@ -30,12 +30,14 @@
                     @forelse ($products as $product)
                     <tr>
                         <td>{{ $product->id }}</td>
-                        <td>Imagen</td>
+                        <td>
+                            <x-image :item="$product" />
+                        </td>
                         <td>{{ $product->name }}</td>
                         <td>{{ $product->purchase_price }}</td>
                         <td>{{ $product->stock }}</td>
                         <td>{{ $product->category_id }}</td>
-                        <td>Active</td>
+                        <td>{{ $product->active ? '✅' : '❌' }}</td>
 
                         <td>{{ $product->name }}</td>
                         <td>
