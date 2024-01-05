@@ -30,4 +30,13 @@ class ProductComponent extends Component
             'products' => $products
         ]);
     }
+
+    public function create()
+    {
+        $this->Id = 0;
+
+        $this->reset(['name']);
+        $this->resetErrorBag();
+        $this->dispatch('open-modal', 'modalProduct');
+    }
 }

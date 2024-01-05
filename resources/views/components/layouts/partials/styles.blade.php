@@ -8,3 +8,5 @@
 <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
 <!-- SweeAlert2 -->
 <link rel="stylesheet" href="{{ asset('plugins/sweetalert2/sweetalert2.css') }}">
+<!-- iCheck for checkboxes and radio inputs -->
+<link rel="stylesheet" href="{{ asset('plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}"

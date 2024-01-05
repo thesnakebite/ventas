@@ -31,7 +31,7 @@
                         <td>{{ $product->id }}</td>
                         <td>{{ $product->image }}</td>
                         <td>{{ $product->name }}</td>
-                        <td>{{ $product->sale_price }}</td>
+                        <td>{{ $product->purchase_price }}</td>
                         <td>{{ $product->stock }}</td>
                         <td>{{ $product->category_id }}</td>
                         <td>Active</td>
@@ -76,25 +76,5 @@
             </x-slot>
     </x-card>
 
-    {{-- <x-modal modalId="modalCategory" modalTitle="Categorías"  >
-        <form wire:submit={{ $Id==0 ? "store" : "update($Id)" }}>
-            <div class="form-row">
-                <div class="form-group col-12">
-                    <label for="name">Nombre:</label>
-                    <input 
-                        wire:model="name"
-                        type="text" 
-                        id="name"
-                        class="form-control" 
-                        placeholder="Nombre categoría" 
-                    />
-                    @error('name')
-                        <div class="alert alert-danger w-100 mt-3 text-sm">{{ $message }}</div>
-                    @enderror
-                </div>
-            </div>
-
-            <button class="btn btn-primary float-right mt-3">{{ $Id==0 ? 'Guardar' : 'Editar' }}</button>
-        </form>
-    </x-modal> --}}
+    @include('products.modal')
 </div>

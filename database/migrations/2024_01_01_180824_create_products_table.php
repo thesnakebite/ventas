@@ -20,7 +20,7 @@ return new class extends Migration
             $table->unsignedInteger('stock');
             $table->unsignedInteger('minimum_stock')->nullable();
             $table->string('barcode')->nullable();
-            $table->date('due date')->nullable();
+            $table->date('date_expired')->nullable();
             $table->boolean('active')->default(true);
             $table->foreignId('category_id')->constrained();
             $table->timestamps();
