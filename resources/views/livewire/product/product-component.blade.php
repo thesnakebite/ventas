@@ -34,10 +34,10 @@
                             <x-image :item="$product" />
                         </td>
                         <td>{{ $product->name }}</td>
-                        <td>{{ $product->purchase_price }}</td>
+                        <td>{{ $product->price }}</td>
                         <td>{!! $product->stockLabel !!}</td>
                         <td>{{ $product->category_id }}</td>
-                        <td>{{ $product->active ? '✅' : '❌' }}</td>
+                        <td>{!! $product->activeLabel !!}</td>
 
                         <td>{{ $product->name }}</td>
                         <td>
