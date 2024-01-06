@@ -43,7 +43,7 @@
                         </td>
                         <td>{!! $product->activeLabel !!}</td>
                         <td>
-                            <a href="#" 
+                            <a href="{{ route('products.show', $product) }}" 
                                class="btn btn-outline-light btn-sm" 
                                title="Ver"
                             >
