@@ -15,7 +15,7 @@
     </div>
 </div>
 
-<div class="table-responsive table-striped table-hover">
+<div class="table-responsive table-striped table-hover text-center">
     <table class="table">
         <thead>
             <tr>

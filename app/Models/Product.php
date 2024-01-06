@@ -16,6 +16,12 @@ class Product extends Model
         return $this->morphOne(Image::class, 'imageable');
     }
 
+    // Un producto pertenece a una categoría
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
     // Atributos
     protected function stockLabel() : Attribute
     {

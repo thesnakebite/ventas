@@ -20,7 +20,9 @@
                         <ul class="list-group mb-3">
                             <li class="list-group-item">
                                 <b>Productos</b>
-                                <a class="float-right">0</a>
+                                <a class="float-right">
+                                    {{ count($category->products) }}
+                                </a>
                             </li>
                             <li class="list-group-item">
                                 <b>Artículos</b> <a class="float-right">0</a>
@@ -30,7 +32,7 @@
                 </div>
             </div>
             <div class="col-md-8">
-                <table class="table">
+                <table class="table text-center">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -41,13 +43,18 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
+                        @foreach ($category->products as $item)
+                            <tr>
+                                <td>{{ $item->id }}</td>
+                                <td>
+                                    <x-image :item="$item" />
+                                </td>
+                                <td>{{ $item->name }}</td>
+                                <td class="font-weight-bold">{{  $item->price  }}</td>
+                                <td>{!! $item->stockLabel !!}</td>
+                            </tr>
+                        @endforeach
+                        
                     </tbody>
                 </table>
             </div>

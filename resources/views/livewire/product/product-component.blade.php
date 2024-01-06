@@ -21,7 +21,6 @@
                     <th>Stock</th>
                     <th>Categoría</th>
                     <th>Estado</th>
-                    <th>Código barras</th>
                     <th width="3%">....</th>
                     <th width="3%">....</th>
                     <th width="3%">....</th>
@@ -34,12 +33,15 @@
                             <x-image :item="$product" />
                         </td>
                         <td>{{ $product->name }}</td>
-                        <td>{{ $product->price }}</td>
+                        <td class="font-weight-bold">{{ $product->price }}</td>
                         <td>{!! $product->stockLabel !!}</td>
-                        <td>{{ $product->category_id }}</td>
+                        <td>
+                            <a href="{{ route('categories.show', $product->category->id) }}" 
+                               class="badge badge-secondary" >
+                                {{ $product->category->name }}
+                            </a>
+                        </td>
                         <td>{!! $product->activeLabel !!}</td>
-
-                        <td>{{ $product->name }}</td>
                         <td>
                             <a href="#" 
                                class="btn btn-outline-light btn-sm" 
