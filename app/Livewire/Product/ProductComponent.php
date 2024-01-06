@@ -56,10 +56,9 @@ class ProductComponent extends Component
 
     public function create()
     {
-        $this->Id = 0;
+        $this->Id= 0;
 
-        $this->reset(['name']);
-        $this->resetErrorBag();
+        $this->clean();
         $this->dispatch('open-modal', 'modalProduct');
     }
 
@@ -141,6 +140,61 @@ class ProductComponent extends Component
         // dump($category);
     }
 
+    public function update(Product $product)
+    {
+        // dump('Actualizar pelicanos');
+
+        $rules = [
+            'name' => 'required|min:5|max:255|unique:products,id,'. $this->Id,
+            'description' => 'max:255',
+            'purchase_price' => 'numeric|nullable',
+            'sale_price' => 'required|numeric',
+            'stock' => 'required|numeric',
+            'minimum_stock' => 'numeric|nullable',
+            'image' => 'image|max:1024|nullable',
+            'category_id' => 'required|numeric',
+        ];
+
+        $messages = [
+            'name.required' => 'El nombre es requerido',
+            'name.min' => 'El nombre debe tener al menos 5 caracteres',
+            'name.max' => 'El nombre debe tener máximo 255 caracteres',
+            'name.unique' => 'El nombre ya existe',
+            'description.max' => 'La descripción debe tener máximo 255 caracteres',
+            'purchase_price.numeric' => 'El precio de compra debe ser numérico',
+            'sale_price.required' => 'El precio de venta es requerido',
+            'sale_price.numeric' => 'El precio de venta debe ser numérico',
+            'stock.required' => 'El stock es requerido',
+            'stock.numeric' => 'El stock debe ser numérico',
+            'minimum_stock.numeric' => 'El stock mínimo debe ser numérico',
+            'image.image' => 'La imagen debe ser de tipo imagen',
+            'image.max' => 'La imagen debe tener máximo 1024 KB',
+            'category_id.required' => 'La categoría es requerida',
+            'category_id.numeric' => 'La categoría debe ser numérica',
+        ];
+
+        $this->validate($rules, $messages);
+
+        $product->name = $this->name;
+        $product->description = $this->description;
+        $product->purchase_price = $this->purchase_price;
+        $product->sale_price = $this->sale_price;
+        $product->stock = $this->stock;
+        $product->minimum_stock = $this->minimum_stock;
+        // $product->image = $this->imageModel;
+        $product->barcode = $this->barcode;
+        $product->date_expired = $this->date_expired;
+        $product->active= $this->active;
+        $product->category_id = $this->category_id;
+
+        $product->update();
+
+        $this->dispatch('close-modal', 'modalProduct');
+        $this->dispatch('msg', 'Producto actualizado con éxito');
+
+        $this->clean();
+    }
+
     public function clean()
     {
         $this->reset([
@@ -157,5 +211,6 @@ class ProductComponent extends Component
             'active',
             'image',
         ]);
+        $this->resetErrorBag();
     }
 }
