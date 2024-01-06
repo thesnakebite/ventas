@@ -5,6 +5,7 @@ namespace App\Livewire\Product;
 use App\Models\Product;
 use Livewire\Component;
 use App\Models\Category;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\Computed;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
@@ -188,6 +189,20 @@ class ProductComponent extends Component
         $product->category_id = $this->category_id;
 
         $product->update();
+
+        if ($this->image) {
+
+            if ($this->image!=null) {
+                Storage::delete('public/' . $product->image->url);
+                $product->image()->delete();
+            }
+
+            $customImage = 'products/' . uniqid() . '.' . $this->image->extension();
+            $this->image->storeAs('public', $customImage);
+            $product->image()->create([
+                'url' => $customImage,
+            ]);
+        }
 
         $this->dispatch('close-modal', 'modalProduct');
         $this->dispatch('msg', 'Producto actualizado con éxito');
