@@ -33,7 +33,7 @@
                             <x-image :item="$product" />
                         </td>
                         <td>{{ $product->name }}</td>
-                        <td class="font-weight-bold">{{ $product->price }}</td>
+                        <td>{!! $product->price !!}</td>
                         <td>{!! $product->stockLabel !!}</td>
                         <td>
                             <a href="{{ route('categories.show', $product->category->id) }}" 

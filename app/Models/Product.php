@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Support\Facades\Storage;
 
 class Product extends Model
 {
@@ -42,7 +43,7 @@ class Product extends Model
         return Attribute::make(
             get: function() {
                 $formattedPrice = number_format($this->attributes['sale_price'], 0, ',', '.');
-                return $formattedPrice . '€';
+                return '<b>' . $formattedPrice . '€' . '</b>';
             }
         );
     }
@@ -57,6 +58,19 @@ class Product extends Model
                 :
                 '<span class="badge badge-warning">Inactivo</span>'
                 ;
+            }
+        );
+    }
+
+    public function imagen() : Attribute
+    {
+        return Attribute::make(
+            get: function() {
+                return $this->image 
+                ? 
+                Storage::url('public/' . $this->image->url) 
+                :
+                asset('no-image.png');
             }
         );
     }
