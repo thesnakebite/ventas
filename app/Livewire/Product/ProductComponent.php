@@ -5,11 +5,12 @@ namespace App\Livewire\Product;
 use App\Models\Product;
 use Livewire\Component;
 use App\Models\Category;
-use Illuminate\Support\Facades\Storage;
-use Livewire\Attributes\Computed;
+use Livewire\Attributes\On;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 use Livewire\Attributes\Title;
+use Livewire\Attributes\Computed;
+use Illuminate\Support\Facades\Storage;
 
 #[Title('Productos')]
 class ProductComponent extends Component
@@ -208,6 +209,22 @@ class ProductComponent extends Component
         $this->dispatch('msg', 'Producto actualizado con éxito');
 
         $this->clean();
+    }
+
+    #[On('destroyProduct')]
+    public function destroy($id)
+    {
+        // dump('Me borrás el pelicano');
+        $product= Product::findOrfail($id);
+
+        if ($product->image!=null) {
+            Storage::delete('public/' . $product->image->url);
+            $product->image()->delete();
+        }
+
+        $product->delete();
+
+        $this->dispatch('msg', 'Producto eliminado con éxito.');
     }
 
     public function clean()
