@@ -33,7 +33,7 @@ class ProductComponent extends Component
     public $date_expired;
     public $active= 1;
     public $image;
-
+    public $imageModel;
 
     public function render()
     {
@@ -117,6 +117,28 @@ class ProductComponent extends Component
         $this->dispatch('msg', 'Producto creado con éxito');
 
         $this->clean();
+    }
+
+    public function edit(Product $product)
+    {
+        $this->clean();
+
+        $this->Id = $product->id;
+        $this->name = $product->name;
+        $this->description = $product->description;
+        $this->purchase_price = $product->purchase_price;
+        $this->sale_price = $product->sale_price;
+        $this->stock = $product->stock;
+        $this->minimum_stock = $product->minimum_stock;
+        $this->imageModel = $product->image;
+        $this->barcode = $product->barcode;
+        $this->date_expired = $product->date_expired;
+        $this->active = $product->active;
+        $this->category_id = $product->category_id;
+
+        $this->dispatch('open-modal', 'modalProduct');
+
+        // dump($category);
     }
 
     public function clean()
