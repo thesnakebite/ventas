@@ -9,7 +9,6 @@ use Livewire\WithPagination;
 use Livewire\Attributes\Title;
 
 #[Title('Categorías')]
-
 class CategoryComponent extends Component
 {
     use WithPagination;
