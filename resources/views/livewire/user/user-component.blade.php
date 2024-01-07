@@ -1,16 +1,20 @@
 <div>
     <div>
-        <x-card cardTitle="Listado categorias ({{ $this->totalRegistros }})">
+        <x-card cardTitle="Listado usuarios ({{ $this->totalRegistros }})">
            <x-slot:cardTools>
               <a href="#" class="btn btn-primary" wire:click='create'>
-                <i class="fas fa-plus-circle"></i> Crear 
+                <i class="fas fa-plus-circle"></i> Crear usuario
               </a>
            </x-slot>
     
            <x-table>
               <x-slot:thead>
                  <th>ID</th>
+                 <th>Imagen</th>
                  <th>Nombre</th>
+                 <th>E-Mail</th>
+                 <th>Perfil</th>
+                 <th>Estado</th>
                  <th width="3%">...</th>
                  <th width="3%">...</th>
                  <th width="3%">...</th>
@@ -21,8 +25,14 @@
                   
                  <tr>
                     <td>{{ $user->id }}</td>
-                    <td>{{ $user->name }}</td>
                     <td>
+                        <x-image :item="$user" />
+                    </td>
+                    <td>{{ $user->name }}</td>
+                    <td>{{ $user->email }}</td>
+                    <td>{{ $user->profile->name }}</td>
+                    <td>{{ $user->admin }}<td>
+                    <td>{{ $user->active }}</td>
                         <a href="#" class="btn btn-success btn-sm" title="Ver">
                             <i class="far fa-eye"></i>
                         </a>
@@ -42,7 +52,7 @@
                  @empty
     
                  <tr class="text-center">
-                    <td colspan="5">Sin registros</td>
+                    <td colspan="9">Sin registros</td>
                  </tr>
                   
                  @endforelse
