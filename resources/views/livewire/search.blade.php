@@ -1,7 +1,12 @@
 <div>
     <form action="simple-results.html">
         <div class="input-group">
-            <input type="search" class="form-control" placeholder="Buscar Producto...">
+            <input 
+                wire:model.live='search'
+                type="search" 
+                class="form-control" 
+                placeholder="Buscar Producto..."
+            />
             <div class="input-group-append">
                 <button wire:click.prevent  class="btn btn-default">
                     <i class="fa fa-search"></i>
@@ -10,6 +15,7 @@
         </div>
     </form>
     <ul class="list-group" id="list-search">
+        @foreach ($products as $product)
         <li class="list-group-item">
             <h5>
                 Imagen
@@ -26,7 +32,8 @@
                     Stock: 10
                 </div>
             </div>
-            
         </li>
+        @endforeach
+        
     </ul>
 </div>
