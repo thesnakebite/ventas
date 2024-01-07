@@ -20,8 +20,14 @@ class UserComponent extends Component
     public $cant= 5;
 
     // Propiedades modelo
-    public $name;
     public $Id;
+    public $name;
+    public $email;
+    public $password;
+    public $admin;
+    public $active;
+    public $image;
+    public $imageModel;
 
     public function render()
     {
@@ -34,5 +40,29 @@ class UserComponent extends Component
         return view('livewire.user.user-component', [
             'users' => $users
         ]);
+    }
+
+    public function create()
+    {
+        $this->Id= 0;
+        $this->clean();
+        $this->dispatch('open-modal', 'modalUser');
+
+    }
+
+    public function clean()
+    {
+        $this->reset([
+            'Id',
+            'name', 
+            'email', 
+            'password', 
+            'admin', 
+            'active', 
+            'image', 
+            'imageModel'
+        ]);
+
+        $this->resetErrorBag();
     }
 }
