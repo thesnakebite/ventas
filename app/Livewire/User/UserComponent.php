@@ -28,6 +28,7 @@ class UserComponent extends Component
     public $active;
     public $image;
     public $imageModel;
+    public $re_password;
 
     public function render()
     {

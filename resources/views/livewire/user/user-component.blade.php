@@ -70,16 +70,105 @@
      <x-modal modalId="modalUser" modalTitle="Usuarios">
         <form wire:submit={{$Id==0 ? "store" : "update($Id)"}}>
             <div class="form-row">
-                <div class="form-group col-12">
+                {{-- Input name --}}
+                <div class="form-group col-12 col-md-6">
                     <label for="name">Nombre:</label>
-                    <input wire:model='name' type="text" class="form-control" placeholder="Nombre" id="name">
+                    <input wire:model='name' 
+                           type="text" 
+                           class="form-control" 
+                           placeholder="Nombre" 
+                           id="name"
+                    />
                     @error('name')
                         <div class="alert alert-danger w-100 mt-2">{{ $message }}</div>
                     @enderror
                 </div>
-            </div>
+
+                {{-- Input email --}}
+                <div class="form-group col-12 col-md-6">
+                    <label for="email">E-Mail:</label>
+                    <input wire:model='email' 
+                           type="email" 
+                           class="form-control" 
+                           placeholder="Tu corre@" 
+                           id="email"
+                    />
+                    @error('email')
+                        <div class="alert alert-danger w-100 mt-2">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                {{-- Input password --}}
+                <div class="form-group col-12 col-md-6">
+                    <label for="password">Password:</label>
+                    <input wire:model='password' 
+                           type="password" 
+                           class="form-control" 
+                           placeholder="Password" 
+                           id="password"
+                    />
+                </div>
+                @error('password')
+                    <div class="alert alert-danger w-100 mt-2">{{ $message }}</div>
+                @enderror
+
+                {{-- Input password_confirmation --}}
+                <div class="form-group col-12 col-md-6">
+                    <label for="re_password">Confirmar password:</label>
+                    <input wire:model='re_password' 
+                           type="password" 
+                           class="form-control" 
+                           placeholder="Confirmar password" 
+                           id="re_password"
+                    />
+                </div>
+                @error('re_password')
+                    <div class="alert alert-danger w-100 mt-2">{{ $message }}</div>
+                @enderror
+
+                {{-- Input checbox admin --}}
+                <div class="form-group form-check">
+                    <div class="icheck-primary">
+                        <input wire:model='admin' 
+                               type="checkbox"
+                               id="admin" 
+                        />
+                        <label class="form-check-label" 
+                               for="admin">
+                               ¿Es Administrador?
+                        </label>
+                    </div>
+                </div>
+
+                {{-- Input checbox admin --}}
+                <div class="form-group form-check">
+                    <div class="icheck-primary">
+                        <input wire:model='active' 
+                               type="checkbox"
+                               id="admin" 
+                        />
+                        <label class="form-check-label" 
+                               for="admin">
+                               ¿Esta activo?
+                        </label>
+                    </div>
+                </div>
+
+                {{-- Input imagen --}}
+                <div class="form-group col-md-6">
+                    <label for="image">Imagen:</label>
+                    <input wire:model='image' 
+                           type="file"  
+                           id="image"
+                           accept="image/*"
+                    />
+                    @error('image')
+                        <div class="alert alert-danger w-100 mt-2">{{ $message }}</div>
+                    @enderror
+                </div>
             
-            <hr>
+            <hr />
+
             <button class="btn btn-primary float-right">{{ $Id==0 ? 'Guardar' : 'Editar' }}</button>    
         </form>
      </x-modal>
