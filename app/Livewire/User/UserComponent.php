@@ -24,11 +24,11 @@ class UserComponent extends Component
     public $name;
     public $email;
     public $password;
+    public $re_password;
     public $admin;
     public $active;
     public $image;
     public $imageModel;
-    public $re_password;
 
     public function render()
     {
@@ -49,6 +49,55 @@ class UserComponent extends Component
         $this->clean();
         $this->dispatch('open-modal', 'modalUser');
 
+    }
+
+    // Crear usuario
+    public function store()
+    {
+        $rules = [
+            'name' => 'required|min:5|max:255',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:5',
+            're_password' => 'required|same:password',
+            'image' => 'image|max:1024|nullable',
+        ];
+
+        $messages = [
+            'name.required' => 'El nombre es requerido',
+            'name.min' => 'El nombre debe tener al menos 5 caracteres',
+            'name.max' => 'El nombre debe tener máximo 255 caracteres',
+            'email.required' => 'El email es requerido',
+            'email.email' => 'El email debe ser válido',
+            'email.unique' => 'El email ya existe',
+            'password.required' => 'La contraseña es requerida',
+            'password.same' => 'Las contraseñas no coinciden',
+            're_password.required' => 'La confirmación de contraseña es requerida',
+            're_password.min' => 'La confirmación de contraseña debe tener al menos 5 caracteres',
+            're_password.same' => 'Las contraseñas no coinciden',
+            'image.image' => 'El archivo debe ser una imagen',
+            'image.max' => 'El archivo debe tener máximo 1MB',
+        ];
+
+        $this->validate($rules, $messages);
+
+        $user = new User();
+        $user->name= $this->name;
+        $user->email= $this->email;
+        $user->password= bcrypt($this->password);
+        // $user->re_password= bcrypt($this->re_password);
+        $user->admin= $this->admin;
+        $user->active= $this->active;
+        $user->save();
+
+        if($this->image) {
+            $customImage = 'users/' . uniqid() . '.' . $this->image->extension();
+            $this->image->storeAs('public', $customImage);
+            $user->image()->create(['url' => $customImage]);
+        }
+
+        $this->dispatch('close-modal', 'modalUser');
+        $this->dispatch('msg', 'Usuario creado correctamente');
+        $this->clean();
     }
 
     public function clean()

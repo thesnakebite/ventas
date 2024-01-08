@@ -1,41 +1,41 @@
 <div>
-    <div>
-        <x-card cardTitle="Listado usuarios ({{ $this->totalRegistros }})">
-           <x-slot:cardTools>
-              <a href="#" class="btn btn-primary" wire:click='create'>
-                <i class="fas fa-plus-circle"></i> Crear usuario
-              </a>
-           </x-slot>
+    <x-card cardTitle="Listado usuarios ({{ $this->totalRegistros }})">
+        <x-slot:cardTools>
+            <a href="#" class="btn btn-primary" wire:click='create'>
+            <i class="fas fa-plus-circle"></i> Crear usuario
+            </a>
+        </x-slot>
+
+        <x-table>
+            <x-slot:thead>
+                <th>ID</th>
+                <th>Imagen</th>
+                <th>Nombre</th>
+                <th>E-mail</th>
+                <th>Admin</th>
+                <th>Estado</th>
+                <th width="3%">...</th>
+                <th width="3%">...</th>
+                <th width="3%">...</th>
     
-           <x-table>
-              <x-slot:thead>
-                 <th>ID</th>
-                 <th>Imagen</th>
-                 <th>Nombre</th>
-                 <th>E-Mail</th>
-                 <th>Perfil</th>
-                 <th>Estado</th>
-                 <th width="3%">...</th>
-                 <th width="3%">...</th>
-                 <th width="3%">...</th>
-     
-              </x-slot>
-    
-              @forelse ($users as $user)
-                  
-                 <tr>
+            </x-slot>
+
+            @forelse ($users as $user)
+                
+                <tr>
                     <td>{{ $user->id }}</td>
                     <td>
                         <x-image :item="$user" />
                     </td>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
-                    <td>{{ $user->profile->name }}</td>
-                    <td>{{ $user->admin }}<td>
+                    <td>{{ $user->admin }}</td>
                     <td>{{ $user->active }}</td>
+                    <td>
                         <a href="#" class="btn btn-success btn-sm" title="Ver">
                             <i class="far fa-eye"></i>
                         </a>
+
                     </td>
                     <td>
                         <a href="#" class="btn btn-primary btn-sm" title="Editar">
@@ -47,37 +47,36 @@
                             <i class="far fa-trash-alt"></i>
                         </a>
                     </td>
-                 </tr>
-    
-                 @empty
-    
-                 <tr class="text-center">
-                    <td colspan="9">Sin registros</td>
-                 </tr>
-                  
-                 @endforelse
-     
-           </x-table>
-     
-           <x-slot:cardFooter>
+                </tr>
 
-           {{ $users->links() }}
+                @empty
+
+                <tr class="text-center">
+                <td colspan="9">Sin registros</td>
+                </tr>
+                
+                @endforelse
     
-           </x-slot>
-        </x-card>
+        </x-table>
     
-    
-     <x-modal modalId="modalUser" modalTitle="Usuarios">
-        <form wire:submit={{$Id==0 ? "store" : "update($Id)"}}>
+        <x-slot:cardFooter>
+
+        {{ $users->links() }}
+
+        </x-slot>
+    </x-card>
+
+    <x-modal modalId="modalUser" modalTitle="Usuarios">
+        <form wire:submit={{ $Id==0 ? "store" : "update($Id)" }}>
             <div class="form-row">
                 {{-- Input name --}}
                 <div class="form-group col-12 col-md-6">
                     <label for="name">Nombre:</label>
                     <input wire:model='name' 
-                           type="text" 
-                           class="form-control" 
-                           placeholder="Nombre" 
-                           id="name"
+                            type="text" 
+                            class="form-control" 
+                            placeholder="Nombre" 
+                            id="name"
                     />
                     @error('name')
                         <div class="alert alert-danger w-100 mt-2">{{ $message }}</div>
@@ -88,10 +87,10 @@
                 <div class="form-group col-12 col-md-6">
                     <label for="email">E-Mail:</label>
                     <input wire:model='email' 
-                           type="email" 
-                           class="form-control" 
-                           placeholder="Tu corre@" 
-                           id="email"
+                            type="email" 
+                            class="form-control" 
+                            placeholder="Tu corre@" 
+                            id="email"
                     />
                     @error('email')
                         <div class="alert alert-danger w-100 mt-2">{{ $message }}</div>
@@ -102,77 +101,83 @@
                 <div class="form-group col-12 col-md-6">
                     <label for="password">Password:</label>
                     <input wire:model='password' 
-                           type="password" 
-                           class="form-control" 
-                           placeholder="Password" 
-                           id="password"
+                            type="password" 
+                            class="form-control" 
+                            placeholder="Password" 
+                            id="password"
                     />
+                    @error('password')
+                        <div class="alert alert-danger w-100 mt-2">{{ $message }}</div>
+                    @enderror
                 </div>
-                @error('password')
-                    <div class="alert alert-danger w-100 mt-2">{{ $message }}</div>
-                @enderror
 
                 {{-- Input password_confirmation --}}
                 <div class="form-group col-12 col-md-6">
                     <label for="re_password">Confirmar password:</label>
                     <input wire:model='re_password' 
-                           type="password" 
-                           class="form-control" 
-                           placeholder="Confirmar password" 
-                           id="re_password"
+                            type="password" 
+                            class="form-control" 
+                            placeholder="Confirmar password" 
+                            id="re_password"
                     />
+                    @error('re_password')
+                        <div class="alert alert-danger w-100 mt-2">{{ $message }}</div>
+                    @enderror
                 </div>
-                @error('re_password')
-                    <div class="alert alert-danger w-100 mt-2">{{ $message }}</div>
-                @enderror
+            
 
                 {{-- Input checbox admin --}}
-                <div class="form-group form-check">
+                <div class="form-group form-check col-md-6">
                     <div class="icheck-primary">
                         <input wire:model='admin' 
-                               type="checkbox"
-                               id="admin" 
+                                type="checkbox"
+                                id="admin" 
                         />
                         <label class="form-check-label" 
-                               for="admin">
-                               ¿Es Administrador?
+                                for="admin">
+                                ¿Es Administrador?
                         </label>
                     </div>
                 </div>
 
-                {{-- Input checbox admin --}}
-                <div class="form-group form-check">
+                {{-- Input checbox active --}}
+                <div class="form-group form-check col-md-6">
                     <div class="icheck-primary">
                         <input wire:model='active' 
-                               type="checkbox"
-                               id="admin" 
+                                type="checkbox"
+                                id="active" 
                         />
                         <label class="form-check-label" 
-                               for="admin">
-                               ¿Esta activo?
+                                for="active">
+                                ¿Esta activo?
                         </label>
                     </div>
                 </div>
 
                 {{-- Input imagen --}}
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-12">
                     <label for="image">Imagen:</label>
                     <input wire:model='image' 
-                           type="file"  
-                           id="image"
-                           accept="image/*"
+                            type="file"  
+                            id="image"
+                            accept="image/*"
                     />
                     @error('image')
                         <div class="alert alert-danger w-100 mt-2">{{ $message }}</div>
                     @enderror
                 </div>
-            
-            <hr />
 
-            <button class="btn btn-primary float-right">{{ $Id==0 ? 'Guardar' : 'Editar' }}</button>    
+                {{-- Preview image --}}
+                <div class="form-group col-md-12">
+                    @if ($this->image)
+                        <img src="{{ $image->temporaryUrl() }}" class="rounded float-right" width="150" />
+                    @endif
+                </div>
+                
+                <hr />
+                
+                <button class="btn btn-primary float-right">{{ $Id==0 ? 'Guardar' : 'Editar' }}</button>
+            </div>   
         </form>
-     </x-modal>
-    
-    </div>
-    
+    </x-modal>
 </div>

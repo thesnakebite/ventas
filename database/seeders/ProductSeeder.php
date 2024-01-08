@@ -20,7 +20,7 @@ class ProductSeeder extends Seeder
         // Creamos el directorio
         Storage::makeDirectory('public/products');
 
-        Product::factory(80)
+        Product::factory(100)
             ->create()
             ->each(function (Product $product) {
                 $faker = Faker::create();
