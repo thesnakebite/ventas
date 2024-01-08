@@ -1,12 +1,13 @@
 <?php
 
-use App\Livewire\Category\CategoryComponent;
-use App\Livewire\Category\CategoryShow;
 use App\Livewire\Home\Inicio;
-use App\Livewire\Product\ProductComponent;
-use App\Livewire\Product\ProductShow;
+use App\Livewire\User\UserShow;
 use App\Livewire\User\UserComponent;
+use App\Livewire\Product\ProductShow;
 use Illuminate\Support\Facades\Route;
+use App\Livewire\Category\CategoryShow;
+use App\Livewire\Product\ProductComponent;
+use App\Livewire\Category\CategoryComponent;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,3 +34,4 @@ Route::get('/categorias/{category}', CategoryShow::class)->name('categories.show
 Route::get('/productos', ProductComponent::class)->name('products');
 Route::get('/productos/{product}', ProductShow::class)->name('products.show');
 Route::get('/usuarios', UserComponent::class)->name('users');
+Route::get('/usuarios/{user}', UserShow::class)->name('users.show');
