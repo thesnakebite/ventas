@@ -46,7 +46,11 @@
                         </a>
                     </td>
                     <td>
-                        <a class="btn btn-danger btn-sm" title="Eliminar">
+                        <a  wire:click="$dispatch('delete', {id: {{ $user->id }}, 
+                            eventName:'destroyUser'})"
+                            class="btn btn-danger btn-sm" 
+                            title="Eliminar"
+                        >
                             <i class="far fa-trash-alt"></i>
                         </a>
                     </td>

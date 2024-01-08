@@ -3,11 +3,12 @@
 namespace App\Livewire\User;
 
 use App\Models\User;
-use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
-use Livewire\Attributes\Title;
+use Livewire\Attributes\On;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
+use Livewire\Attributes\Title;
+use Illuminate\Support\Facades\Storage;
 
 #[Title('Usuarios')]
 class UserComponent extends Component
@@ -170,6 +171,21 @@ class UserComponent extends Component
         $this->dispatch('msg', 'Usuario actualizado correctamente');
 
         $this->clean();
+    }
+
+    #[On('destroyUser')]
+    public function delete($id)
+    {
+        $user = User::findOrfail($id);
+
+        if($user->image!=null) {
+            Storage::delete('public/' . $user->image->url);
+            $user->image()->delete();
+
+            $user->delete();
+
+            $this->dispatch('msg', 'Usuario eliminado correctamente');
+        }
     }
 
     public function clean()
