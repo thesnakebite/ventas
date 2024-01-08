@@ -160,6 +160,7 @@
                 {{-- Input imagen --}}
                 <div class="form-group col-md-12">
                     <label for="image">Imagen:</label>
+                    <br />
                     <input wire:model='image' 
                             type="file"  
                             id="image"
@@ -180,7 +181,10 @@
                     @endif
 
                     @if ($this->image)
-                        <img src="{{ $image->temporaryUrl() }}" class="rounded float-right" width="100" />
+                        <img src="{{ $image->temporaryUrl() }}" 
+                             class="rounded float-left" 
+                             width="100" 
+                        />
                     @endif
                 </div>
                 

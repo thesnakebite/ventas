@@ -149,6 +149,10 @@ class UserComponent extends Component
         $user->admin = $this->admin;
         $user->active = $this->active;
 
+        if($this->password) {
+            $user->password= bcrypt($this->password);
+        }
+
         $user->update();
 
         if($this->image) {
