@@ -120,7 +120,7 @@ class UserComponent extends Component
     {
         $rules = [
             'name' => 'required|min:5|max:255',
-            'email' => 'required|email|unique:users, id,' .$this->Id,
+            'email' => 'required|email|unique:users,id,'. $this->Id,
             'password' => 'min:5|nullable',
             're_password' => 'same:password|nullable',
             'image' => 'image|max:1024|nullable',
