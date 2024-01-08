@@ -3,6 +3,7 @@
 namespace App\Livewire\User;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\Attributes\Title;
 use Livewire\WithPagination;
@@ -25,8 +26,9 @@ class UserComponent extends Component
     public $email;
     public $password;
     public $re_password;
-    public $admin;
-    public $active;
+    // Por defecto establecemos el valor true al Administrador y Activo
+    public $admin = true;
+    public $active = true;
     public $image;
     public $imageModel;
 
@@ -97,6 +99,72 @@ class UserComponent extends Component
 
         $this->dispatch('close-modal', 'modalUser');
         $this->dispatch('msg', 'Usuario creado correctamente');
+        $this->clean();
+    }
+
+    public function edit(User $user)
+    {
+        $this->clean();
+
+        $this->Id= $user->id;
+        $this->name= $user->name;
+        $this->email= $user->email;
+        $this->admin= $user->admin ? true : false;
+        $this->active= $user->active ? true : false;
+        $this->imageModel= $user->image ? $user->image->url : null;
+
+        $this->dispatch('open-modal', 'modalUser');
+    }
+
+    public function update(User $user)
+    {
+        $rules = [
+            'name' => 'required|min:5|max:255',
+            'email' => 'required|email|unique:users, id,' .$this->Id,
+            'password' => 'min:5|nullable',
+            're_password' => 'same:password|nullable',
+            'image' => 'image|max:1024|nullable',
+        ];
+
+        $messages = [
+            'name.required' => 'El nombre es requerido',
+            'name.min' => 'El nombre debe tener al menos 5 caracteres',
+            'name.max' => 'El nombre debe tener máximo 255 caracteres',
+            'email.required' => 'El email es requerido',
+            'email.email' => 'El email debe ser válido',
+            'email.unique' => 'El email ya existe',
+            'password.required' => 'La contraseña es requerida',
+            'password.same' => 'Las contraseñas no coinciden',
+            're_password.required' => 'La confirmación de contraseña es requerida',
+            're_password.min' => 'La confirmación de contraseña debe tener al menos 5 caracteres',
+            're_password.same' => 'Las contraseñas no coinciden',
+            'image.image' => 'El archivo debe ser una imagen',
+            'image.max' => 'El archivo debe tener máximo 1MB',
+        ];
+
+        $this->validate($rules, $messages);
+
+        $user->name= $this->name;
+        $user->email= $this->email;
+        $user->admin = $this->admin;
+        $user->active = $this->active;
+
+        $user->update();
+
+        if($this->image) {
+            if($user->image!= null) {
+                Storage::delete('public/' . $user->image->url);
+                $user->image()->delete();
+            }
+
+            $customImage = 'users/' . uniqid() . '.' . $this->image->extension();
+            $this->image->storeAs('public', $customImage);
+            $user->image()->create(['url' => $customImage]);
+        }
+
+        $this->dispatch('close-modal', 'modalUser');
+        $this->dispatch('msg', 'Usuario actualizado correctamente');
+
         $this->clean();
     }
 

@@ -172,7 +172,7 @@
                     <img src="{{ $image->temporaryUrl() }}" 
                          width="100"
                          class="rounded float-right"
-                         />
+                    />
                 @endif
             </div>
         </div>

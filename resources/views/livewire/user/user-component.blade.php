@@ -12,7 +12,7 @@
                 <th>Imagen</th>
                 <th>Nombre</th>
                 <th>E-mail</th>
-                <th>Admin</th>
+                <th>Perfil</th>
                 <th>Estado</th>
                 <th width="3%">...</th>
                 <th width="3%">...</th>
@@ -29,8 +29,8 @@
                     </td>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
-                    <td>{{ $user->admin }}</td>
-                    <td>{{ $user->active }}</td>
+                    <td>{{ $user->admin ? 'Administrador' : 'Vendedor'}}</td>
+                    <td>{{ $user->active ? 'Activo' : 'Inactivo' }}</td>
                     <td>
                         <a href="#" class="btn btn-success btn-sm" title="Ver">
                             <i class="far fa-eye"></i>
@@ -38,7 +38,10 @@
 
                     </td>
                     <td>
-                        <a href="#" class="btn btn-primary btn-sm" title="Editar">
+                        <a wire:click='edit( {{ $user->id }} )' 
+                           class="btn btn-primary btn-sm" 
+                           title="Editar"
+                        >
                             <i class="far fa-edit"></i>
                         </a>
                     </td>
@@ -169,8 +172,15 @@
 
                 {{-- Preview image --}}
                 <div class="form-group col-md-12">
+                    @if ($Id > 0)
+                        <x-image :item="$user= App\Models\User::find($Id)" 
+                                 size="100"
+                                 float="float-right" 
+                        />
+                    @endif
+
                     @if ($this->image)
-                        <img src="{{ $image->temporaryUrl() }}" class="rounded float-right" width="150" />
+                        <img src="{{ $image->temporaryUrl() }}" class="rounded float-right" width="100" />
                     @endif
                 </div>
                 
