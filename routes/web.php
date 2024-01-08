@@ -20,15 +20,12 @@ use App\Livewire\Category\CategoryComponent;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Auth::routes(['register' => false]);
 
-Auth::routes();
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', Inicio::class)->name('home')->middleware(['auth']);
 
-Route::get('/inicio', Inicio::class)->name('inicio')->middleware(['auth']);
 Route::get('/categorias', CategoryComponent::class)->name('categories')->middleware(['auth']);
 Route::get('/categorias/{category}', CategoryShow::class)->name('categories.show')->middleware(['auth']);
 Route::get('/productos', ProductComponent::class)->name('products')->middleware(['auth']);

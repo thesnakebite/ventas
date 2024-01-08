@@ -56,7 +56,7 @@ class User extends Authenticatable
         );
     }
 
-    public function imagen() : Attribute
+    protected function imagen() : Attribute
     {
         return Attribute::make(
             get: function() {
