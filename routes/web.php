@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Livewire\Category\CategoryShow;
 use App\Livewire\Product\ProductComponent;
 use App\Livewire\Category\CategoryComponent;
+use App\Livewire\Client\ClientComponent;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,3 +33,4 @@ Route::get('/productos', ProductComponent::class)->name('products')->middleware(
 Route::get('/productos/{product}', ProductShow::class)->name('products.show')->middleware(['auth']);
 Route::get('/usuarios', UserComponent::class)->name('users')->middleware(['auth']);
 Route::get('/usuarios/{user}', UserShow::class)->name('users.show')->middleware(['auth']);
+Route::get('/clientes', ClientComponent::class)->name('clients')->middleware(['auth']);
