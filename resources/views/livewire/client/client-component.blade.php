@@ -29,17 +29,17 @@
                 <td>{{$client->email}}</td>
 
                 <td>
-                    <a href="#" class="btn btn-success btn-sm" title="Ver">
+                    <a href="#" class="btn btn-outline-light btn-sm" title="Ver">
                         <i class="far fa-eye"></i>
                     </a>
                 </td>
                 <td>
-                    <a href="#" wire:click='edit({{ $client->id }})' class="btn btn-primary btn-sm" title="Editar">
+                    <a href="#" wire:click='edit({{ $client->id }})' class="btn btn-outline-primary btn-sm" title="Editar">
                         <i class="far fa-edit"></i>
                     </a>
                 </td>
                 <td>
-                    <a wire:click="$dispatch('delete',{id: {{$client->id}}, eventName:'destroyClient'})" class="btn btn-danger btn-sm" title="Eliminar">
+                    <a wire:click="$dispatch('delete',{id: {{$client->id}}, eventName:'destroyClient'})" class="btn btn-outline-danger btn-sm" title="Eliminar">
                         <i class="far fa-trash-alt"></i>
                     </a>
                 </td>

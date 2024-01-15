@@ -32,14 +32,14 @@
                     <td>{{ $user->admin ? 'Administrador' : 'Vendedor'}}</td>
                     <td> {!! $user->activeLabel !!}</td>
                     <td>
-                        <a href="{{ route('users.show', $user) }}" class="btn btn-success btn-sm" title="Ver">
+                        <a href="{{ route('users.show', $user) }}" class="btn btn-outline-light btn-sm" title="Ver">
                             <i class="far fa-eye"></i>
                         </a>
 
                     </td>
                     <td>
                         <a wire:click='edit( {{ $user->id }} )' 
-                           class="btn btn-primary btn-sm" 
+                           class="btn btn-outline-primary btn-sm" 
                            title="Editar"
                         >
                             <i class="far fa-edit"></i>
@@ -48,7 +48,7 @@
                     <td>
                         <a  wire:click="$dispatch('delete', {id: {{ $user->id }}, 
                             eventName:'destroyUser'})"
-                            class="btn btn-danger btn-sm" 
+                            class="btn btn-outline-danger btn-sm" 
                             title="Eliminar"
                         >
                             <i class="far fa-trash-alt"></i>
