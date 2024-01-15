@@ -50,7 +50,7 @@
                                     <x-image :item="$item" />
                                 </td>
                                 <td>{{ $item->name }}</td>
-                                <td class="font-weight-bold">{{  $item->price  }}</td>
+                                <td class="font-weight-bold">{!!  $item->price  !!}</td>
                                 <td>{!! $item->stockLabel !!}</td>
                             </tr>
                         @endforeach

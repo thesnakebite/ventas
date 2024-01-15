@@ -18,8 +18,13 @@ class ClientComponent extends Component
     public $cant= 5;
 
     // Propiedades modelo
-    public $name;
     public $Id;
+    public $name;
+    public $identification;
+    public $phone;
+    public $email;
+    public $company;
+    public $cif;
 
     public function render()
     {
