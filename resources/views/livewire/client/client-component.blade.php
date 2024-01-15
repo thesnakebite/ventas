@@ -62,7 +62,7 @@
     </x-card>
 
 
- <x-modal modalId="modalItem" modalTitle="Items">
+ <x-modal modalId="modalClient" modalTitle="Clientes">
     <form wire:submit={{$Id==0 ? "store" : "update($Id)"}}>
         <div class="form-row">
             <div class="form-group col-12">

@@ -5,10 +5,13 @@ namespace App\Livewire\Client;
 use App\Models\Client;
 use Livewire\Component;
 use Livewire\Attributes\Title;
+use Livewire\WithPagination;
 
 #[Title('Clientes')]
 class ClientComponent extends Component
 {
+    use WithPagination;
+
     // Propiedades clase
     public $search= '';
     public $totalRegistros= 0;
@@ -33,5 +36,19 @@ class ClientComponent extends Component
         return view('livewire.client.client-component', [
             'clients' => $clients
         ]);
+    }
+
+    public function create()
+    {
+        $this->Id= 0;
+        $this->clean();
+        
+        $this->dispatch('open-modal', 'modalClient');
+    }
+
+    public function clean()
+    {
+        $this->reset(['name']);
+        $this->resetErrorBag();
     }
 }
