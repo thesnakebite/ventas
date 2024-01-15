@@ -1,8 +1,8 @@
 <div>
-    <x-card cardTitle="Listado categorias ({{$this->totalRegistros}})">
+    <x-card cardTitle="Listado clientes ({{ $this->totalRegistros }})">
        <x-slot:cardTools>
           <a href="#" class="btn btn-primary" wire:click='create'>
-            <i class="fas fa-plus-circle"></i> Crear 
+            <i class="fas fa-plus-circle"></i> Crear cliente
           </a>
        </x-slot>
 
@@ -10,29 +10,36 @@
           <x-slot:thead>
              <th>ID</th>
              <th>Nombre</th>
+             <th>Identificación</th>
+             <th>E-Mail</th>
+             <th>Teléfono</th>
              <th width="3%">...</th>
              <th width="3%">...</th>
              <th width="3%">...</th>
  
           </x-slot>
 
-          @forelse ($items as $item)
+          @forelse ($clients as $client)
               
              <tr>
-                <td>{{$item->id}}</td>
-                <td>{{$item->name}}</td>
+                <td>{{$client->id}}</td>
+                <td>{{$client->name}}</td>
+                <td>{{$client->identification}}</td>
+                <td>{{$client->phone}}</td>
+                <td>{{$client->email}}</td>
+
                 <td>
-                    <a href="{{route('item.show',$item)}}" class="btn btn-success btn-sm" title="Ver">
+                    <a href="#" class="btn btn-success btn-sm" title="Ver">
                         <i class="far fa-eye"></i>
                     </a>
                 </td>
                 <td>
-                    <a href="#" wire:click='edit({{$item->id}})' class="btn btn-primary btn-sm" title="Editar">
+                    <a href="#" wire:click='edit({{ $client->id }})' class="btn btn-primary btn-sm" title="Editar">
                         <i class="far fa-edit"></i>
                     </a>
                 </td>
                 <td>
-                    <a wire:click="$dispatch('delete',{id: {{$item->id}}, eventName:'destroyItem'})" class="btn btn-danger btn-sm" title="Eliminar">
+                    <a wire:click="$dispatch('delete',{id: {{$client->id}}, eventName:'destroyClient'})" class="btn btn-danger btn-sm" title="Eliminar">
                         <i class="far fa-trash-alt"></i>
                     </a>
                 </td>
@@ -41,7 +48,7 @@
              @empty
 
              <tr class="text-center">
-                <td colspan="5">Sin registros</td>
+                <td colspan="8">Sin registros</td>
              </tr>
               
              @endforelse
@@ -49,7 +56,7 @@
        </x-table>
  
        <x-slot:cardFooter>
-            {{$items->links()}}
+            {{ $clients->links() }}
 
        </x-slot>
     </x-card>
