@@ -57,11 +57,11 @@ class ClientComponent extends Component
             'name' => 'required|min:5|max:255',
             'identification' => 'required|max:15|unique:clients',
             'email' => 'required|email|nullable',
-            'phone' => 'required|number',
+            'phone' => 'required|numeric',
 
         ];
 
-        $messages = [
+        $message = [
             'name.required' => 'El nombre es requerido',
             'name.min' => 'El nombre debe tener al menos 5 caracteres',
             'name.max' => 'El nombre debe tener como máximo 255 caracteres',
@@ -74,7 +74,7 @@ class ClientComponent extends Component
             'phone.number' => 'El teléfono no es válido',
         ];
 
-        $this->validate($rules, $messages);
+        $this->validate($rules, $message);
 
         $client = new Client;
         $client->name = $this->name;
@@ -95,7 +95,7 @@ class ClientComponent extends Component
     public function edit(Client $client)
     {
         $this->clean();
-        
+
         $this->Id= $client->id;
         $this->name= $client->name;
         $this->identification= $client->identification;
@@ -105,6 +105,46 @@ class ClientComponent extends Component
         $this->cif= $client->cif;
 
         $this->dispatch('open-modal', 'modalClient');
+    }
+
+
+    public function update(Client $client)
+    {
+        $rules = [
+            'name' => 'required|min:5|max:255',
+            'identification' => 'required|max:15|unique:clients,id,' . $this->Id,
+            'email' => 'required|email|nullable',
+            'phone' => 'required|numeric',
+
+        ];
+
+        $message = [
+            'name.required' => 'El nombre es requerido',
+            'name.min' => 'El nombre debe tener al menos 5 caracteres',
+            'name.max' => 'El nombre debe tener como máximo 255 caracteres',
+            'identification.required' => 'La identificación es requerida',
+            'identification.max' => 'La identificación debe tener como máximo 15 caracteres',
+            'identification.unique' => 'El identificador ya existe',
+            'email.required' => 'El email es requerido',
+            'email.email' => 'El email no es válido',
+            'phone.required' => 'El teléfono es requerido',
+            'phone.number' => 'El teléfono no es válido',
+        ];
+
+        $this->validate($rules, $message);
+
+        $client->name = $this->name;
+        $client->identification = $this->identification;
+        $client->phone = $this->phone;
+        $client->email = $this->email;
+        $client->company = $this->company;
+        $client->cif = $this->cif; 
+        $client->update();
+
+        $this->dispatch('close-modal', 'modalClient');
+        $this->dispatch('msg', 'Cliente actualizado correctamente');
+
+        $this->clean();
     }
 
     public function clean()
