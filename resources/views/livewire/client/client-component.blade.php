@@ -22,11 +22,11 @@
           @forelse ($clients as $client)
               
              <tr>
-                <td>{{$client->id}}</td>
-                <td>{{$client->name}}</td>
-                <td>{{$client->identification}}</td>
-                <td>{{$client->phone}}</td>
-                <td>{{$client->email}}</td>
+                <td>{{ $client->id }}</td>
+                <td>{{ $client->name }}</td>
+                <td>{{ $client->identification }}</td>
+                <td>{{ $client->phone }}</td>
+                <td>{{ $client->email }}</td>
 
                 <td>
                     <a href="#" class="btn btn-outline-light btn-sm" title="Ver">

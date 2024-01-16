@@ -51,9 +51,60 @@ class ClientComponent extends Component
         $this->dispatch('open-modal', 'modalClient');
     }
 
+    public function store()
+    {
+        $rules = [
+            'name' => 'required|min:5|max:255',
+            'identification' => 'required|max:15|unique:clients',
+            'email' => 'required|email|nullable',
+            'phone' => 'required|number',
+
+        ];
+
+        $messages = [
+            'name.required' => 'El nombre es requerido',
+            'name.min' => 'El nombre debe tener al menos 5 caracteres',
+            'name.max' => 'El nombre debe tener como máximo 255 caracteres',
+            'identification.required' => 'La identificación es requerida',
+            'identification.max' => 'La identificación debe tener como máximo 15 caracteres',
+            'identification.unique' => 'El identificador ya existe',
+            'email.required' => 'El email es requerido',
+            'email.email' => 'El email no es válido',
+            'phone.required' => 'El teléfono es requerido',
+            'phone.number' => 'El teléfono no es válido',
+        ];
+
+        $this->validate($rules, $messages);
+
+        $client = new Client;
+        $client->name = $this->name;
+        $client->identification = $this->identification;
+        $client->phone = $this->phone;
+        $client->email = $this->email;
+        $client->company = $this->company;
+        $client->cif = $this->cif;
+
+        $client->save();
+
+        $this->dispatch('close-modal', 'modalClient');
+        $this->dispatch('msg', 'Cliente creado correctamente');
+
+        $this->clean();
+
+    }
+
     public function clean()
     {
-        $this->reset(['name']);
+        $this->reset([
+            'Id',
+            'name', 
+            'identification', 
+            'phone', 
+            'email', 
+            'company', 
+            'cif'
+        ]);
+
         $this->resetErrorBag();
     }
 }
