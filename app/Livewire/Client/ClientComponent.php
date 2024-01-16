@@ -4,8 +4,9 @@ namespace App\Livewire\Client;
 
 use App\Models\Client;
 use Livewire\Component;
-use Livewire\Attributes\Title;
+use Livewire\Attributes\On;
 use Livewire\WithPagination;
+use Livewire\Attributes\Title;
 
 #[Title('Clientes')]
 class ClientComponent extends Component
@@ -145,6 +146,15 @@ class ClientComponent extends Component
         $this->dispatch('msg', 'Cliente actualizado correctamente');
 
         $this->clean();
+    }
+
+    #[On('destroyClient')]
+    public function destroy($id)
+    {
+        $client= Client::findOrFail($id);
+        $client->delete();
+
+        $this->dispatch('msg', 'Cliente eliminado correctamente');
     }
 
     public function clean()
