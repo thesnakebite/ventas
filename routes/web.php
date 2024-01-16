@@ -9,6 +9,7 @@ use App\Livewire\Category\CategoryShow;
 use App\Livewire\Product\ProductComponent;
 use App\Livewire\Category\CategoryComponent;
 use App\Livewire\Client\ClientComponent;
+use App\Livewire\Client\ClientShow;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,3 +35,4 @@ Route::get('/productos/{product}', ProductShow::class)->name('products.show')->m
 Route::get('/usuarios', UserComponent::class)->name('users')->middleware(['auth']);
 Route::get('/usuarios/{user}', UserShow::class)->name('users.show')->middleware(['auth']);
 Route::get('/clientes', ClientComponent::class)->name('clients')->middleware(['auth']);
+Route::get('/clientes/{client}', ClientShow::class)->name('clients.show')->middleware(['auth']);

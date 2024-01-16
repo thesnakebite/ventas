@@ -29,7 +29,7 @@
                 <td>{{ $client->email }}</td>
 
                 <td>
-                    <a href="#" class="btn btn-outline-light btn-sm" title="Ver">
+                    <a href="{{ route('clients.show', $client) }}" class="btn btn-outline-light btn-sm" title="Ver">
                         <i class="far fa-eye"></i>
                     </a>
                 </td>
