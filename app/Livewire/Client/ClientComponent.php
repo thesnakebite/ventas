@@ -90,7 +90,21 @@ class ClientComponent extends Component
         $this->dispatch('msg', 'Cliente creado correctamente');
 
         $this->clean();
+    }
 
+    public function edit(Client $client)
+    {
+        $this->clean();
+        
+        $this->Id= $client->id;
+        $this->name= $client->name;
+        $this->identification= $client->identification;
+        $this->phone= $client->phone;
+        $this->email= $client->email;
+        $this->company= $client->company;
+        $this->cif= $client->cif;
+
+        $this->dispatch('open-modal', 'modalClient');
     }
 
     public function clean()
