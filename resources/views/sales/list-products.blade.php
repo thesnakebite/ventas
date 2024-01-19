@@ -16,25 +16,32 @@
                 <th scope="col">...</th>
 
             </x-slot>
+            @forelse ($products as $product)
             <tr>
-                <td scope="row"></td>
+                <td>{{ $product->id }}</td>
                 <td>
                     
-                    <img src="">
+                    <x-image :item="$product->image" />
                 </td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{{ $product->name }}</td>
+                <td>{!! $product->priceLabel !!}</td>
+                <td>{!! $product->stockLabel !!}</td>
                 <td>
                     <button class="btn btn-primary btn-sm" title="Agregar">
                         <i class="fas fa-plus-circle"></i>
                     </button>
                 </td>
             </tr>
+            
+            @empty
             <tr>
                 <td colspan="10">Sin Registros</td>
             </tr>
+            @endforelse
         </x-table>
     </div>
-    <div class="card-footer"></div>
+    <div class="card-footer">
+        {{ $products->links() }}
+    </div>
+    
 </div>

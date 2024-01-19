@@ -38,7 +38,7 @@ class Product extends Model
         );
     }
 
-    protected function price() : Attribute
+    protected function priceLabel() : Attribute
     {
         return Attribute::make(
             get: function() {
